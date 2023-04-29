@@ -4,21 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f955c7cf-fd66-491d-afdb-92debbb8f3bc" name="Default Changelist" comment="Changed application file.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/controller/ProjectController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/dto/ProjectRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/dto/ProjectResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/entity/ProjectEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/exception/NotFoundProjectException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/exception/ProjectManagerExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/exception/SqlException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/mapper/ProjectMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/repository/ProjectRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/repository/impl/ProjectRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/service/ProjectService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/service/impl/ProjectServiceImpl.java" afterDir="false" />
+    <list default="true" id="f955c7cf-fd66-491d-afdb-92debbb8f3bc" name="Default Changelist" comment="Added CUD operations.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/dto/DeleteProjectResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/dto/ProjectRequestUpdateDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/dto/Status.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/projectmanager/controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/controller/ProjectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/dto/ProjectRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/dto/ProjectRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/mapper/ProjectMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/mapper/ProjectMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/projectmanager/repository/ProjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/repository/ProjectRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/projectmanager/repository/impl/ProjectRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/repository/impl/ProjectRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/projectmanager/service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/service/ProjectService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/projectmanager/service/impl/ProjectServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/service/impl/ProjectServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1__init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1__init.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -92,7 +89,7 @@
       <workItem from="1682601966309" duration="145000" />
       <workItem from="1682602336672" duration="1988000" />
       <workItem from="1682663268508" duration="11211000" />
-      <workItem from="1682759893652" duration="8364000" />
+      <workItem from="1682759893652" duration="14991000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1682590748911</created>
@@ -122,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682762744616</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added get project methods.">
+      <created>1682768578341</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1682768578341</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,6 +150,8 @@
     <MESSAGE value="init commit" />
     <MESSAGE value="Added flyway migration." />
     <MESSAGE value="Changed application file." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed application file." />
+    <MESSAGE value="Added get project methods." />
+    <MESSAGE value="Added CUD operations." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added CUD operations." />
   </component>
 </project>

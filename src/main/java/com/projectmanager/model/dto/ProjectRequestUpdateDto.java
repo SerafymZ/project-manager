@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProjectRequestDto {
+public class ProjectRequestUpdateDto {
+
+    private Long id;
 
     private Long parentId;
 

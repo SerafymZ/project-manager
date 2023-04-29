@@ -1,6 +1,7 @@
 package com.projectmanager.service.impl;
 
 import com.projectmanager.model.dto.ProjectRequestDto;
+import com.projectmanager.model.dto.ProjectRequestUpdateDto;
 import com.projectmanager.model.dto.ProjectResponseDto;
 import com.projectmanager.model.entity.ProjectEntity;
 import com.projectmanager.model.exception.NotFoundProjectException;
@@ -47,16 +48,32 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectResponseDto saveProject(ProjectRequestDto projectRequestDto) {
-        return null;
+        ProjectEntity sourceProjectEntity = projectMapper.toEntity(projectRequestDto);
+        ProjectEntity savedProjectEntity = projectRepository.saveProject(sourceProjectEntity);
+        return projectMapper.toResponseDto(savedProjectEntity);
     }
 
     @Override
-    public ProjectResponseDto updateProject(ProjectRequestDto projectRequestDto) {
-        return null;
+    public ProjectResponseDto updateProject(ProjectRequestUpdateDto projectRequestUpdateDto) {
+
+        projectRepository.findProjectById(projectRequestUpdateDto.getId())
+                .orElseThrow(() -> new NotFoundProjectException(String.format(
+                        NOT_FOUND_PROJECT_MESSAGE,
+                        projectRequestUpdateDto.getId()))
+                );
+
+        ProjectEntity sourceEntity = projectMapper.toEntity(projectRequestUpdateDto);
+        ProjectEntity updatedEntity = projectRepository.updateProject(sourceEntity);
+
+        return projectMapper.toResponseDto(updatedEntity);
     }
 
     @Override
-    public int deleteProjectById(int projectId) {
-        return 0;
+    public int deleteProject(long projectId) {
+
+        projectRepository.findProjectById(projectId)
+                .orElseThrow(() -> new NotFoundProjectException(String.format(NOT_FOUND_PROJECT_MESSAGE, projectId)));
+
+        return projectRepository.deleteProject(projectId);
     }
 }

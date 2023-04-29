@@ -40,20 +40,68 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     @Override
     public Optional<ProjectEntity> findProjectById(long id) {
 
-        var sql = "SELECT id, "
+        var sql = "SELECT ID, "
                 + "parentID, "
                 + "name, "
                 + "description FROM Project "
-                + "WHERE id = :projectId";
+                + "WHERE ID = :projectId";
 
-        var parameterSource = new MapSqlParameterSource()
-                .addValue("projectId", id);
+        var parameterSource = new MapSqlParameterSource("projectId", id);
 
         try {
             ProjectEntity projectEntity = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, rowMapper);
             return Optional.of(projectEntity);
-        }catch (EmptyResultDataAccessException exception) {
+        } catch (EmptyResultDataAccessException exception) {
             return Optional.empty();
+        }
+    }
+
+    @Override
+    public ProjectEntity saveProject(ProjectEntity sourceEntity) {
+
+        var sql = "INSERT INTO Project OUTPUT inserted.* VALUES (:parentId, :name, :description)";
+
+        var parameterSource = new MapSqlParameterSource()
+                .addValue("parentId", sourceEntity.getParentId())
+                .addValue("name", sourceEntity.getName())
+                .addValue("description", sourceEntity.getDescription());
+
+        try {
+            return namedParameterJdbcTemplate.queryForObject(sql, parameterSource, rowMapper);
+        } catch (DataAccessException dae) {
+            throw new SqlException("Error during find project by id");
+        }
+    }
+
+    @Override
+    public ProjectEntity updateProject(ProjectEntity sourceEntity) {
+
+        var sql = "UPDATE Project SET parentID = :parentId, name = : name, description = : description "
+                + "OUTPUT inserted.* "
+                + "WHERE ID = :id";
+
+        var parameterSource = new MapSqlParameterSource()
+                .addValue("id", sourceEntity.getId())
+                .addValue("name", sourceEntity.getName())
+                .addValue("description", sourceEntity.getDescription());
+
+        try {
+            return namedParameterJdbcTemplate.queryForObject(sql, parameterSource, rowMapper);
+        } catch (DataAccessException dae) {
+            throw new SqlException("Error during update project by id");
+        }
+    }
+
+    @Override
+    public int deleteProject(long id) {
+
+        var sql = "DELETE FROM Project WHERE ID = :id";
+
+        var parameterSource = new MapSqlParameterSource("id", id);
+        try {
+            return namedParameterJdbcTemplate.update(sql, parameterSource);
+        } catch (DataAccessException dae) {
+            throw new SqlException("Error during delete project by id");
         }
     }
 }
