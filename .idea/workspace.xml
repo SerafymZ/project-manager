@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f955c7cf-fd66-491d-afdb-92debbb8f3bc" name="Default Changelist" comment="init commit">
+    <list default="true" id="f955c7cf-fd66-491d-afdb-92debbb8f3bc" name="Default Changelist" comment="Added flyway migration.">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/controller/ProjectController.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/entity/ProjectEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1__init.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/asd.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +48,17 @@
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ProjectManagerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="project-manager" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.projectmanager.ProjectManagerApplication" />
@@ -72,7 +82,7 @@
       <workItem from="1682601966309" duration="145000" />
       <workItem from="1682602336672" duration="1988000" />
       <workItem from="1682663268508" duration="11211000" />
-      <workItem from="1682759893652" duration="2015000" />
+      <workItem from="1682759893652" duration="2745000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1682590748911</created>
@@ -88,7 +98,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682602436262</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added flyway migration.">
+      <created>1682762303163</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1682762303163</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -110,7 +127,8 @@
     <MESSAGE value="Create project" />
     <MESSAGE value="first commit" />
     <MESSAGE value="init commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="init commit" />
+    <MESSAGE value="Added flyway migration." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added flyway migration." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
