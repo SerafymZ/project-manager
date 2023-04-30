@@ -57,9 +57,9 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     }
 
     @Override
-    public ProjectEntity saveProject(ProjectEntity sourceEntity) {
+    public int saveProject(ProjectEntity sourceEntity) {
 
-        var sql = "INSERT INTO Project VALUES (:parentId, :name, :description)";
+        var sql = "INSERT INTO Project(parentid, name, description) VALUES (:parentId, :name, :description)";
 
         var parameterSource = new MapSqlParameterSource()
                 .addValue("parentId", sourceEntity.getParentId())
@@ -67,26 +67,26 @@ public class ProjectRepositoryImpl implements ProjectRepository {
                 .addValue("description", sourceEntity.getDescription());
 
         try {
-            return namedParameterJdbcTemplate.queryForObject(sql, parameterSource, rowMapper);
+            return namedParameterJdbcTemplate.update(sql, parameterSource);
         } catch (DataAccessException dae) {
             throw new SqlException("Error during save project.");
         }
     }
 
     @Override
-    public ProjectEntity updateProject(ProjectEntity sourceEntity) {
+    public int updateProject(ProjectEntity sourceEntity) {
 
-        var sql = "UPDATE Project SET parentID = :parentId, name = : name, description = : description "
-                + "OUTPUT inserted.* "
+        var sql = "UPDATE Project SET parentID = :parentId, name = :name, description = :description "
                 + "WHERE ID = :id";
 
         var parameterSource = new MapSqlParameterSource()
                 .addValue("id", sourceEntity.getId())
+                .addValue("parentId", sourceEntity.getParentId())
                 .addValue("name", sourceEntity.getName())
                 .addValue("description", sourceEntity.getDescription());
 
         try {
-            return namedParameterJdbcTemplate.queryForObject(sql, parameterSource, rowMapper);
+            return namedParameterJdbcTemplate.update(sql, parameterSource);
         } catch (DataAccessException dae) {
             throw new SqlException("Error during update project by id");
         }

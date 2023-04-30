@@ -47,14 +47,13 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectResponseDto saveProject(ProjectRequestDto projectRequestDto) {
+    public int saveProject(ProjectRequestDto projectRequestDto) {
         ProjectEntity sourceProjectEntity = projectMapper.toEntity(projectRequestDto);
-        ProjectEntity savedProjectEntity = projectRepository.saveProject(sourceProjectEntity);
-        return projectMapper.toResponseDto(savedProjectEntity);
+        return projectRepository.saveProject(sourceProjectEntity);
     }
 
     @Override
-    public ProjectResponseDto updateProject(ProjectRequestUpdateDto projectRequestUpdateDto) {
+    public int updateProject(ProjectRequestUpdateDto projectRequestUpdateDto) {
 
         projectRepository.findProjectById(projectRequestUpdateDto.getId())
                 .orElseThrow(() -> new NotFoundProjectException(String.format(
@@ -63,9 +62,7 @@ public class ProjectServiceImpl implements ProjectService {
                 );
 
         ProjectEntity sourceEntity = projectMapper.toEntity(projectRequestUpdateDto);
-        ProjectEntity updatedEntity = projectRepository.updateProject(sourceEntity);
-
-        return projectMapper.toResponseDto(updatedEntity);
+        return projectRepository.updateProject(sourceEntity);
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface ProjectRepository {
     List<ProjectEntity> findAllProjects();
     Optional<ProjectEntity> findProjectById(long id);
-    ProjectEntity saveProject(ProjectEntity sourceEntity);
-    ProjectEntity updateProject(ProjectEntity sourceEntity);
+    int saveProject(ProjectEntity sourceEntity);
+    int updateProject(ProjectEntity sourceEntity);
     int deleteProject(long id);
 }

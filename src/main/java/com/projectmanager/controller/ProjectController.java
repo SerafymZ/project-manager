@@ -14,34 +14,58 @@ import java.util.List;
 @RequestMapping("/project")
 public class ProjectController {
 
+    private final String INCORRECT_SAVE_PROJECT_MESSAGE = "Saving project incorrectly";
+    private final String INCORRECT_UPDATE_PROJECT_MESSAGE = "Updating project incorrectly";
     private final String INCORRECT_DELETE_PROJECT_MESSAGE = "Deleting project incorrectly";
 
     private final ProjectService projectService;
 
     @GetMapping
     public List<ProjectResponseDto> getAllProjects() {
+
         return projectService.getAllProjects();
     }
 
     @PostMapping
-    public ProjectResponseDto saveProject(@Valid @RequestBody ProjectRequestDto projectRequestDto) {
-        return projectService.saveProject(projectRequestDto);
+    public ResponseDto saveProject(@Valid @RequestBody ProjectRequestDto projectRequestDto) {
+
+        var resultDto = new ResponseDto();
+
+        int savedProjectCount = projectService.saveProject(projectRequestDto);
+        if(savedProjectCount == 1) {
+            resultDto.setStatus(Status.OK);
+        } else {
+            resultDto.setStatus(Status.Failed);
+            resultDto.setMessage(INCORRECT_SAVE_PROJECT_MESSAGE);
+        }
+
+        return resultDto;
     }
 
     @PutMapping("/{id}")
-    public ProjectResponseDto updateProject(@PathVariable @Min(1) Long id,
+    public ResponseDto updateProject(@PathVariable @Min(1) Long id,
         @Valid @RequestBody ProjectRequestUpdateDto dto) {
 
         dto.setId(id);
-        return projectService.updateProject(dto);
+        var resultDto = new ResponseDto();
+
+        int updatedProjectCount = projectService.updateProject(dto);
+        if(updatedProjectCount == 1) {
+            resultDto.setStatus(Status.OK);
+        } else {
+            resultDto.setStatus(Status.Failed);
+            resultDto.setMessage(INCORRECT_UPDATE_PROJECT_MESSAGE);
+        }
+
+        return resultDto;
     }
 
     @DeleteMapping("/{id}")
-    public DeleteProjectResponseDto deleteProject(@PathVariable @Min(1) Long id) {
+    public ResponseDto deleteProject(@PathVariable @Min(1) Long id) {
 
         int deletedProjectsCount = projectService.deleteProject(id);
 
-        var resultDto = new DeleteProjectResponseDto();
+        var resultDto = new ResponseDto();
         if(deletedProjectsCount == 1) {
             resultDto.setStatus(Status.OK);
         } else {
