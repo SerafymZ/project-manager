@@ -1,7 +1,7 @@
 package com.projectmanager.repository.impl;
 
 import com.projectmanager.model.entity.ProjectEntity;
-import com.projectmanager.model.exception.SqlException;
+import com.projectmanager.exception.SqlException;
 import com.projectmanager.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -25,7 +25,7 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     @Override
     public List<ProjectEntity> findAllProjects() {
 
-        var sql = "SELECT id, "
+        var sql = "SELECT ID, "
                 + "parentID, "
                 + "name, "
                 + "description FROM Project";
@@ -59,7 +59,7 @@ public class ProjectRepositoryImpl implements ProjectRepository {
     @Override
     public ProjectEntity saveProject(ProjectEntity sourceEntity) {
 
-        var sql = "INSERT INTO Project OUTPUT inserted.* VALUES (:parentId, :name, :description)";
+        var sql = "INSERT INTO Project VALUES (:parentId, :name, :description)";
 
         var parameterSource = new MapSqlParameterSource()
                 .addValue("parentId", sourceEntity.getParentId())
@@ -69,7 +69,7 @@ public class ProjectRepositoryImpl implements ProjectRepository {
         try {
             return namedParameterJdbcTemplate.queryForObject(sql, parameterSource, rowMapper);
         } catch (DataAccessException dae) {
-            throw new SqlException("Error during find project by id");
+            throw new SqlException("Error during save project.");
         }
     }
 

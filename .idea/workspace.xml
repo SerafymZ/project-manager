@@ -5,18 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f955c7cf-fd66-491d-afdb-92debbb8f3bc" name="Default Changelist" comment="Added CUD operations.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/dto/DeleteProjectResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/dto/ProjectRequestUpdateDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/dto/Status.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/config/security/DataSourceConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/config/security/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/projectmanager/controller/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/controller/ProjectController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/dto/ProjectRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/dto/ProjectRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/mapper/ProjectMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/mapper/ProjectMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/projectmanager/repository/ProjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/repository/ProjectRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/exception/NotFoundProjectException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/exception/NotFoundProjectException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/exception/ProjectManagerExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/exception/ProjectManagerExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/projectmanager/model/exception/SqlException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/exception/SqlException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/projectmanager/repository/impl/ProjectRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/repository/impl/ProjectRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/projectmanager/service/ProjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/service/ProjectService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/projectmanager/service/impl/ProjectServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/projectmanager/service/impl/ProjectServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V1__init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V1__init.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,22 +47,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Java/nayax/cloudretail-admin-panel-srv/cloudretail-admin-panel-srv" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Java/nayax/gateway-test/gateway-test" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.projectmanager" />
+    </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ProjectManagerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="project-manager" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.projectmanager.ProjectManagerApplication" />
@@ -89,7 +80,9 @@
       <workItem from="1682601966309" duration="145000" />
       <workItem from="1682602336672" duration="1988000" />
       <workItem from="1682663268508" duration="11211000" />
-      <workItem from="1682759893652" duration="14991000" />
+      <workItem from="1682759893652" duration="17872000" />
+      <workItem from="1682830076570" duration="3124000" />
+      <workItem from="1682840383969" duration="2920000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <created>1682590748911</created>
@@ -126,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682768578341</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added CUD operations.">
+      <created>1682795207562</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1682795207562</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,5 +153,21 @@
     <MESSAGE value="Added get project methods." />
     <MESSAGE value="Added CUD operations." />
     <option name="LAST_COMMIT_MESSAGE" value="Added CUD operations." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/projectmanager/repository/impl/ProjectRepositoryImpl.java</url>
+          <line>71</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/projectmanager/repository/impl/ProjectRepositoryImpl.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

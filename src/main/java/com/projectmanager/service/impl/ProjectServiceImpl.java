@@ -4,7 +4,7 @@ import com.projectmanager.model.dto.ProjectRequestDto;
 import com.projectmanager.model.dto.ProjectRequestUpdateDto;
 import com.projectmanager.model.dto.ProjectResponseDto;
 import com.projectmanager.model.entity.ProjectEntity;
-import com.projectmanager.model.exception.NotFoundProjectException;
+import com.projectmanager.exception.NotFoundProjectException;
 import com.projectmanager.model.mapper.ProjectMapper;
 import com.projectmanager.repository.ProjectRepository;
 import com.projectmanager.service.ProjectService;

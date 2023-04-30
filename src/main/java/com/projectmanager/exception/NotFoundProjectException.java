@@ -1,4 +1,4 @@
-package com.projectmanager.model.exception;
+package com.projectmanager.exception;
 
 public class NotFoundProjectException extends RuntimeException{
     public NotFoundProjectException(String message) {
