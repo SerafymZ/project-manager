@@ -1,5 +1,6 @@
-package com.projectmanager.model.dto;
+package com.projectmanager.model.dto.project;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,9 +8,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProjectResponseDto {
+public class ProjectRequestUpdateDto {
+
     private Long id;
+
     private Long parentId;
+
+    @NotBlank
     private String name;
+
     private String description;
 }

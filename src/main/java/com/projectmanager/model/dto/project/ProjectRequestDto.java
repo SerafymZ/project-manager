@@ -1,4 +1,4 @@
-package com.projectmanager.model.dto;
+package com.projectmanager.model.dto.project;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProjectRequestUpdateDto {
-
-    private Long id;
+public class ProjectRequestDto {
 
     private Long parentId;
 

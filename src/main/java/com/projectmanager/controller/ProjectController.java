@@ -1,6 +1,9 @@
 package com.projectmanager.controller;
 
 import com.projectmanager.model.dto.*;
+import com.projectmanager.model.dto.project.ProjectRequestDto;
+import com.projectmanager.model.dto.project.ProjectRequestUpdateDto;
+import com.projectmanager.model.dto.project.ProjectResponseDto;
 import com.projectmanager.service.ProjectService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;

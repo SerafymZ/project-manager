@@ -1,8 +1,8 @@
 package com.projectmanager.model.mapper;
 
-import com.projectmanager.model.dto.ProjectRequestDto;
-import com.projectmanager.model.dto.ProjectRequestUpdateDto;
-import com.projectmanager.model.dto.ProjectResponseDto;
+import com.projectmanager.model.dto.project.ProjectRequestDto;
+import com.projectmanager.model.dto.project.ProjectRequestUpdateDto;
+import com.projectmanager.model.dto.project.ProjectResponseDto;
 import com.projectmanager.model.entity.ProjectEntity;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
