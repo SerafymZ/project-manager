@@ -1,5 +1,6 @@
 package com.projectmanager.model.dto.project;
 
+import com.projectmanager.validation.IsProjectExist;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProjectRequestDto {
 
+    @IsProjectExist
     private Long parentId;
 
     @NotBlank
