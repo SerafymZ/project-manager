@@ -22,6 +22,18 @@ public class ProjectManagerExceptionHandler {
     }
 
     @ExceptionHandler
+    ResponseEntity<ResponseDto> handleException(NotFoundProjectException exception) {
+        var response = new ResponseDto(Status.Failed, List.of(exception.getMessage()));
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    ResponseEntity<ResponseDto> handleException(NotFoundTaskException exception) {
+        var response = new ResponseDto(Status.Failed, List.of(exception.getMessage()));
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
     public ResponseEntity<ResponseDto> handleException(MethodArgumentNotValidException exception) {
         List<String> errors = new ArrayList<>();
         for (FieldError fieldError : exception.getBindingResult().getFieldErrors()){

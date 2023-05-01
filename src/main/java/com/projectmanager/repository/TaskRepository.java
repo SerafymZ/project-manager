@@ -3,9 +3,12 @@ package com.projectmanager.repository;
 import com.projectmanager.model.entity.TaskEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TaskRepository {
 
     List<TaskEntity> findAllTasks();
-    int deleteTasksByProjectID(long projectId);
+    Optional<TaskEntity> findTaskById(long id);
+    int deleteTasksByProjectId(long projectId);
+    int deleteTaskById(Long id);
 }

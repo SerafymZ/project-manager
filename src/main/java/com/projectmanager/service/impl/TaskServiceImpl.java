@@ -1,5 +1,6 @@
 package com.projectmanager.service.impl;
 
+import com.projectmanager.exception.NotFoundTaskException;
 import com.projectmanager.model.dto.task.TaskCreateReqDto;
 import com.projectmanager.model.dto.task.TaskResponseDto;
 import com.projectmanager.model.entity.TaskEntity;
@@ -16,6 +17,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class TaskServiceImpl implements TaskService {
+
+    private final String TASK_NOT_FOUND_MESSAGE = "There is no project with ID = %d in database.";
 
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
@@ -41,7 +44,16 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void deleteTasksByProjectID(long projectId) {
-        taskRepository.deleteTasksByProjectID(projectId);
+        taskRepository.deleteTasksByProjectId(projectId);
+    }
+
+    @Override
+    public int deleteTaskById(Long id) {
+
+        taskRepository.findTaskById(id)
+                .orElseThrow(() -> new NotFoundTaskException(String.format(TASK_NOT_FOUND_MESSAGE, id)));
+
+        return taskRepository.deleteTaskById(id);
     }
 
 }

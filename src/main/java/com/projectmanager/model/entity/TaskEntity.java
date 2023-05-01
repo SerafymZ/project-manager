@@ -1,6 +1,7 @@
 package com.projectmanager.model.entity;
 
 import com.projectmanager.model.TaskStatus;
+import com.projectmanager.model.TaskType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,8 @@ public class TaskEntity {
     private Long id;
     private Long projectId;
     private Long userId;
-    private TaskStatus status;
+    private TaskType taskType;
+    private TaskStatus taskStatus;
     private String description;
     private String branch;
     private String managerDocs;
