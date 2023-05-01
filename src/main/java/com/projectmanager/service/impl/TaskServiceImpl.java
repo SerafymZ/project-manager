@@ -10,6 +10,7 @@ import com.projectmanager.model.entity.TaskEntity;
 import com.projectmanager.model.mapper.TaskMapper;
 import com.projectmanager.repository.TaskRepository;
 import com.projectmanager.service.TaskService;
+import com.projectmanager.service.ValidationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class TaskServiceImpl implements TaskService {
 
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
+    private final ValidationService validationService;
 
     @Override
     public List<TaskResponseDto> getAllTasks() {
@@ -42,6 +44,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public int saveTask(TaskCreateReqDto reqDto) {
+        validationService.validate(reqDto);
         TaskCreateEntity sourceEntity = taskMapper.toCreateEntity(reqDto);
         return taskRepository.saveTask(sourceEntity);
     }
@@ -72,6 +75,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public int updateTask(TaskUpdateDto updateDto) {
 
+        validationService.validate(updateDto);
         taskRepository.findTaskById(updateDto.getId())
                 .orElseThrow(() -> new NotFoundTaskException(String.format(TASK_NOT_FOUND_MESSAGE, updateDto.getId())));
 

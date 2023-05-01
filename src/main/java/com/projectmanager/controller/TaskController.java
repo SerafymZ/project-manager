@@ -10,10 +10,12 @@ import com.projectmanager.service.TaskService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Validated
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/task")
@@ -67,7 +69,7 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public ResponseDto updateTask(@PathVariable Long id, @Valid @RequestBody TaskUpdateDto taskUpdateDto) {
+    public ResponseDto updateTask(@Min(1) @PathVariable Long id, @Valid @RequestBody TaskUpdateDto taskUpdateDto) {
 
         taskUpdateDto.setId(id);
 
@@ -86,7 +88,7 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseDto deleteTaskById(@PathVariable @Min(1) Long id) {
+    public ResponseDto deleteTaskById(@Min(1) @PathVariable Long id) {
 
         int deletedTasksCount = taskService.deleteTaskById(id);
 
