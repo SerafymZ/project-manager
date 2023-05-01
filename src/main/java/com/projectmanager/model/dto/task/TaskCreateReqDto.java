@@ -16,7 +16,6 @@ public class TaskCreateReqDto {
     @IsProjectExist
     private Long projectId;
 
-    @NotNull
     @IsAvailableType
     private Long taskTypeId;
 
