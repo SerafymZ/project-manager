@@ -8,10 +8,12 @@ import com.projectmanager.service.ProjectService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/project")
@@ -39,7 +41,7 @@ public class ProjectController {
             resultDto.setStatus(Status.OK);
         } else {
             resultDto.setStatus(Status.Failed);
-            resultDto.setMessage(INCORRECT_SAVE_PROJECT_MESSAGE);
+            resultDto.setErrors(List.of(INCORRECT_SAVE_PROJECT_MESSAGE));
         }
 
         return resultDto;
@@ -57,7 +59,7 @@ public class ProjectController {
             resultDto.setStatus(Status.OK);
         } else {
             resultDto.setStatus(Status.Failed);
-            resultDto.setMessage(INCORRECT_UPDATE_PROJECT_MESSAGE);
+            resultDto.setErrors(List.of(INCORRECT_UPDATE_PROJECT_MESSAGE));
         }
 
         return resultDto;
@@ -73,7 +75,7 @@ public class ProjectController {
             resultDto.setStatus(Status.OK);
         } else {
             resultDto.setStatus(Status.Failed);
-            resultDto.setMessage(INCORRECT_DELETE_PROJECT_MESSAGE);
+            resultDto.setErrors(List.of(INCORRECT_DELETE_PROJECT_MESSAGE));
         }
 
         return resultDto;
