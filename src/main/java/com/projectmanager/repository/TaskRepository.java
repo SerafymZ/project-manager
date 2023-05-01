@@ -7,4 +7,5 @@ import java.util.List;
 public interface TaskRepository {
 
     List<TaskEntity> findAllTasks();
+    int deleteTasksByProjectID(long projectId);
 }

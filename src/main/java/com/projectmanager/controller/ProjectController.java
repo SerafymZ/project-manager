@@ -71,7 +71,7 @@ public class ProjectController {
         int deletedProjectsCount = projectService.deleteProject(id);
 
         var resultDto = new ResponseDto();
-        if(deletedProjectsCount == 1) {
+        if(deletedProjectsCount > 1) {
             resultDto.setStatus(Status.OK);
         } else {
             resultDto.setStatus(Status.Failed);

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -102,6 +103,20 @@ public class ProjectRepositoryImpl implements ProjectRepository {
             return namedParameterJdbcTemplate.update(sql, parameterSource);
         } catch (DataAccessException dae) {
             throw new SqlException("Error during delete project by id");
+        }
+    }
+
+    @Override
+    public List<Long> findChildId(long parentId) {
+
+        var sql = "SELECT ID FROM Project WHERE parentID = :parentId";
+
+        var parameterSource = new MapSqlParameterSource("parentId", parentId);
+
+        try {
+            return namedParameterJdbcTemplate.query(sql, parameterSource, new SingleColumnRowMapper<>(Long.class));
+        } catch (DataAccessException dae) {
+            throw new SqlException("Error during find child project ids");
         }
     }
 }

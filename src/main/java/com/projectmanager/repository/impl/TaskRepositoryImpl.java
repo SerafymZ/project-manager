@@ -6,6 +6,7 @@ import com.projectmanager.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -34,6 +35,20 @@ public class TaskRepositoryImpl implements TaskRepository {
             return namedParameterJdbcTemplate.query(sql, new BeanPropertyRowMapper<>(TaskEntity.class));
         } catch (DataAccessException exception) {
             throw new SqlException("Error during find all tasks")    ;
+        }
+    }
+
+    @Override
+    public int deleteTasksByProjectID(long projectId) {
+
+        var sql = "DELETE FROM Task WHERE projectID = :projectId";
+
+        var parameterSource = new MapSqlParameterSource("projectId", projectId);
+
+        try {
+            return namedParameterJdbcTemplate.update(sql, parameterSource);
+        } catch (DataAccessException exception) {
+            throw new SqlException("Error during delete tasks by project id.")    ;
         }
     }
 }

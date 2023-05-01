@@ -9,4 +9,5 @@ public interface TaskService {
 
     List<TaskResponseDto> getAllTasks();
     int saveTask(TaskCreateReqDto reqDto);
+    void deleteTasksByProjectID(long projectId);
 }

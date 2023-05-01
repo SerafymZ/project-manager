@@ -11,4 +11,5 @@ public interface ProjectRepository {
     int saveProject(ProjectEntity sourceEntity);
     int updateProject(ProjectEntity sourceEntity);
     int deleteProject(long id);
+    List<Long> findChildId(long parentId);
 }
