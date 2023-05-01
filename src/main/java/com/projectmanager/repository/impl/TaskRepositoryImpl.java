@@ -27,18 +27,16 @@ public class TaskRepositoryImpl implements TaskRepository {
     @Override
     public List<TaskEntity> findAllTasks() {
 
-        var sql = "SELECT t.ID, "
-                + "t.projectID, "
-                + "t.userID, "
-                + "tt.taskType, "
-                + "ts.taskStatus, "
-                + "t.description, "
-                + "t.branch, "
-                + "t.managerDocs, "
-                + "t.creationDate, "
-                + "t.updateDate FROM Task AS t "
-                + "JOIN TaskType AS tt ON t.taskTypeId = tt.ID "
-                + "JOIN TaskStatus AS ts ON t.statusId = ts.ID";
+        var sql = "SELECT ID, "
+                + "projectID, "
+                + "userID, "
+                + "taskTypeId, "
+                + "taskStatusId, "
+                + "description, "
+                + "branch, "
+                + "managerDocs, "
+                + "creationDate, "
+                + "updateDate FROM Task";
 
         try {
             return namedParameterJdbcTemplate.query(sql, new BeanPropertyRowMapper<>(TaskEntity.class));
@@ -50,18 +48,17 @@ public class TaskRepositoryImpl implements TaskRepository {
     @Override
     public Optional<TaskEntity> findTaskById(long id) {
 
-        var sql = "SELECT t.ID, "
-                + "t.projectID, "
-                + "t.userID, "
-                + "tt.taskType, "
-                + "ts.taskStatus, "
-                + "t.description, "
-                + "t.branch, "
-                + "t.managerDocs, "
-                + "t.creationDate, "
-                + "t.updateDate FROM Task AS t "
-                + "JOIN TaskType AS tt ON t.taskTypeId = tt.ID AND t.ID = :taskId "
-                + "JOIN TaskStatus AS ts ON t.statusId = ts.ID";
+        var sql = "SELECT ID, "
+                + "projectID, "
+                + "userID, "
+                + "taskTypeId, "
+                + "taskStatusId, "
+                + "description, "
+                + "branch, "
+                + "managerDocs, "
+                + "creationDate, "
+                + "updateDate FROM Task "
+                + "WHERE ID = :taskId";
 
         var parameterSource = new MapSqlParameterSource("taskId", id);
 
@@ -104,7 +101,7 @@ public class TaskRepositoryImpl implements TaskRepository {
     @Override
     public int updateTaskStatus(Long taskId, Long statusId) {
 
-        var sql = "UPDATE Task SET statusId = :statusId, updateDate = CURRENT_TIMESTAMP WHERE ID = :taskId";
+        var sql = "UPDATE Task SET taskStatusId = :statusId, updateDate = CURRENT_TIMESTAMP WHERE ID = :taskId";
 
         var parameterSource = new MapSqlParameterSource()
                 .addValue("taskId", taskId)
@@ -119,12 +116,12 @@ public class TaskRepositoryImpl implements TaskRepository {
     @Override
     public int saveTask(TaskCreateEntity sourceEntity) {
 
-        var sql = "INSERT INTO Task(projectID, userId, taskTypeId, statusId, description, creationDate, updateDate, branch, managerDocs) "
+        var sql = "INSERT INTO Task(projectID, userId, taskTypeId, taskStatusId, description, creationDate, updateDate, branch, managerDocs) "
                 + "VALUES(:projectId, :userId, :taskTypeId, :statusId, :description, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :branch, :managerDocs)";
 
         var parameterSource = new MapSqlParameterSource()
                 .addValue("projectId", sourceEntity.getProjectId())
-                .addValue("userId", 1L)
+                .addValue("userId", sourceEntity.getUserId())
                 .addValue("taskTypeId", sourceEntity.getTaskTypeId())
                 .addValue("statusId", TaskStatus.NEW.getStatusId())
                 .addValue("description", sourceEntity.getDescription())
@@ -135,6 +132,35 @@ public class TaskRepositoryImpl implements TaskRepository {
             return namedParameterJdbcTemplate.update(sql, parameterSource);
         } catch (DataAccessException exception) {
             throw new SqlException("Error during save task.");
+        }
+    }
+
+    public int updateTask(TaskEntity sourceEntity) {
+        var sql = "UPDATE Task SET projectID = :projectId, "
+                  + "userId = :userId, "
+                  + "taskTypeId = :taskTypeId, "
+                  + "taskStatusId = :statusId, "
+                  + "description = :description, "
+                  + "creationDate = CURRENT_TIMESTAMP,"
+                  + "updateDate = CURRENT_TIMESTAMP, "
+                  + "branch = :branch, "
+                  + "managerDocs = :managerDocs "
+                  + "WHERE ID = :id";
+
+        var parameterSource = new MapSqlParameterSource()
+                .addValue("id", sourceEntity.getId())
+                .addValue("projectId", sourceEntity.getProjectId())
+                .addValue("userId", sourceEntity.getUserId())
+                .addValue("taskTypeId", sourceEntity.getTaskTypeId())
+                .addValue("statusId", sourceEntity.getTaskStatusId())
+                .addValue("description", sourceEntity.getDescription())
+                .addValue("branch", sourceEntity.getBranch())
+                .addValue("managerDocs", sourceEntity.getManagerDocs());
+
+        try {
+            return namedParameterJdbcTemplate.update(sql, parameterSource);
+        } catch (DataAccessException exception) {
+            throw new SqlException("Error during updating task.");
         }
     }
 }

@@ -1,22 +1,24 @@
 package com.projectmanager.validation;
 
-import com.projectmanager.model.TaskStatus;
+import com.projectmanager.repository.TaskStatusRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+@RequiredArgsConstructor
 @Component
-public class TaskStatusValidator implements ConstraintValidator<AvailableStatusValue, String> {
+public class TaskStatusValidator implements ConstraintValidator<IsAvailableStatus, Long> {
+
+    private final TaskStatusRepository taskStatusRepository;
 
     @Override
-    public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(Long value, ConstraintValidatorContext constraintValidatorContext) {
 
-        for(TaskStatus status : TaskStatus.values()) {
-            if(status.name().equals(value)) {
-                return true;
-            }
+        if(value == null) {
+            return false;
         }
 
-        return false;
+        return taskStatusRepository.findTaskStatusById(value).isPresent();
     }
 }

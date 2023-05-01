@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = TaskStatusValidator.class)
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface AvailableStatusValue {
+public @interface IsAvailableStatus {
 
     String MESSAGE = "Task status value is invalid";
 

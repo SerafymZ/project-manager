@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class ProjectIdValidator implements ConstraintValidator<AvailableStatusValue, Long> {
+public class ProjectIdValidator implements ConstraintValidator<IsProjectExist, Long> {
 
     private final ProjectRepository projectRepository;
 

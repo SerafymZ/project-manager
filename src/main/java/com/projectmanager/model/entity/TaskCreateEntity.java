@@ -11,6 +11,7 @@ public class TaskCreateEntity {
 
     private Long projectId;
     private Long taskTypeId;
+    private Long userId;
     private String description;
     private String branch;
     private String managerDocs;

@@ -1,7 +1,5 @@
 package com.projectmanager.model.dto.task;
 
-import com.projectmanager.model.TaskStatus;
-import com.projectmanager.model.TaskType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,8 +14,8 @@ public class TaskResponseDto {
     private Long id;
     private Long projectId;
     private Long userId;
-    private TaskStatus taskStatus;
-    private TaskType taskType;
+    private Long taskTypeId;
+    private Long taskStatusId;
     private String description;
     private String branch;
     private String managerDocs;

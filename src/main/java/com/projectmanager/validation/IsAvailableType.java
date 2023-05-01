@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = TaskTypeValidator.class)
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface AvailableTypeValue {
+public @interface IsAvailableType {
 
     String MESSAGE = "Task type value is invalid";
 

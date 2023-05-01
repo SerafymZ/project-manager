@@ -14,4 +14,5 @@ public interface TaskRepository {
     int deleteTaskById(Long id);
     int updateTaskStatus(Long taskId, Long statusId);
     int saveTask(TaskCreateEntity sourceEntity);
+    int updateTask(TaskEntity sourceEntity);
 }

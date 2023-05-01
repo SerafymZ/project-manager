@@ -20,7 +20,7 @@ CREATE TABLE Task (
     projectID bigint NOT NULL REFERENCES project(ID),
     userId bigint NOT NULL, // REFERENCES user(id),
     taskTypeId bigint NOT NULL REFERENCES TaskType(ID),
-    statusId bigint NOT NULL REFERENCES TaskStatus(ID),
+    taskStatusId bigint NOT NULL REFERENCES TaskStatus(ID),
     description varchar(255) NULL_TO_DEFAULT,
     creationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updateDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -52,7 +52,7 @@ INSERT INTO TaskStatus VALUES (1, 'NEW');
 INSERT INTO TaskStatus VALUES (2, 'PROGRESS');
 INSERT INTO TaskStatus VALUES (3, 'DONE');
 
-INSERT INTO Task(projectID, userId, taskTypeId, statusId, description, creationDate, updateDate, branch, managerDocs) VALUES
+INSERT INTO Task(projectID, userId, taskTypeId, taskStatusId, description, creationDate, updateDate, branch, managerDocs) VALUES
 (1, 1, 2, 1, 'description', '2023-04-17 18:47:52.69', '2023-04-18 15:50:52.69','branch1', null),
 (4, 2, 1, 2, 'description', '2023-04-11 14:45:52.69', '2023-04-12 09:53:52.69', null, 'docs');
 
