@@ -58,7 +58,7 @@ public class TaskRepositoryImpl implements TaskRepository {
                 + "t.managerDocs, "
                 + "t.creationDate, "
                 + "t.updateDate FROM Task AS t "
-                + "JOIN TaskType AS tt ON t.taskTypeId = tt.ID AND ID = :taskId "
+                + "JOIN TaskType AS tt ON t.taskTypeId = tt.ID AND t.ID = :taskId "
                 + "JOIN TaskStatus AS ts ON t.statusId = ts.ID";
 
         var parameterSource = new MapSqlParameterSource("taskId", id);
@@ -96,6 +96,21 @@ public class TaskRepositoryImpl implements TaskRepository {
             return namedParameterJdbcTemplate.update(sql, parameterSource);
         } catch (DataAccessException exception) {
             throw new SqlException("Error during delete task by id.")    ;
+        }
+    }
+
+    @Override
+    public int updateTaskStatus(Long taskId, Long statusId) {
+
+        var sql = "UPDATE Task SET statusId = :statusId WHERE ID = :taskId";
+
+        var parameterSource = new MapSqlParameterSource()
+                .addValue("taskId", taskId)
+                .addValue("statusId", statusId);
+        try {
+            return namedParameterJdbcTemplate.update(sql, parameterSource);
+        } catch (DataAccessException exception) {
+            throw new SqlException("Error during updating task status by id.")    ;
         }
     }
 }

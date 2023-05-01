@@ -4,6 +4,7 @@ import com.projectmanager.model.dto.ResponseDto;
 import com.projectmanager.model.dto.Status;
 import com.projectmanager.model.dto.task.TaskCreateReqDto;
 import com.projectmanager.model.dto.task.TaskResponseDto;
+import com.projectmanager.model.dto.task.TaskStatusUpdateDto;
 import com.projectmanager.service.TaskService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -19,6 +20,7 @@ public class TaskController {
 
     private final String INCORRECT_SAVE_TASK_MESSAGE = "Saving project incorrectly";
     private final String INCORRECT_DELETE_TASK_MESSAGE = "Deleting task incorrectly";
+    private final String INCORRECT_STATUS_UPDATE_TASK_MESSAGE = "Updating task status incorrectly";
 
     private final TaskService taskService;
 
@@ -38,6 +40,25 @@ public class TaskController {
         } else {
             resultDto.setStatus(Status.Failed);
             resultDto.setErrors(List.of(INCORRECT_SAVE_TASK_MESSAGE));
+        }
+
+        return resultDto;
+    }
+
+    @PutMapping("/status/{taskId}")
+    public ResponseDto updateTaskStatus(@PathVariable @Min(1) Long taskId,
+                                        @Valid @RequestBody TaskStatusUpdateDto updateDto) {
+
+        updateDto.setTaskId(taskId);
+
+        int updatedCount = taskService.updateTaskStatus(updateDto);
+
+        var resultDto = new ResponseDto();
+        if(updatedCount == 1) {
+            resultDto.setStatus(Status.OK);
+        } else {
+            resultDto.setStatus(Status.Failed);
+            resultDto.setErrors(List.of(INCORRECT_STATUS_UPDATE_TASK_MESSAGE));
         }
 
         return resultDto;

@@ -11,4 +11,5 @@ public interface TaskRepository {
     Optional<TaskEntity> findTaskById(long id);
     int deleteTasksByProjectId(long projectId);
     int deleteTaskById(Long id);
+    int updateTaskStatus(Long taskId, Long statusId);
 }

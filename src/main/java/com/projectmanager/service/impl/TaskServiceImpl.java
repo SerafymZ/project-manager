@@ -1,8 +1,10 @@
 package com.projectmanager.service.impl;
 
 import com.projectmanager.exception.NotFoundTaskException;
+import com.projectmanager.model.TaskStatus;
 import com.projectmanager.model.dto.task.TaskCreateReqDto;
 import com.projectmanager.model.dto.task.TaskResponseDto;
+import com.projectmanager.model.dto.task.TaskStatusUpdateDto;
 import com.projectmanager.model.entity.TaskEntity;
 import com.projectmanager.model.mapper.TaskMapper;
 import com.projectmanager.repository.TaskRepository;
@@ -54,6 +56,17 @@ public class TaskServiceImpl implements TaskService {
                 .orElseThrow(() -> new NotFoundTaskException(String.format(TASK_NOT_FOUND_MESSAGE, id)));
 
         return taskRepository.deleteTaskById(id);
+    }
+
+    @Override
+    public int updateTaskStatus(TaskStatusUpdateDto updateDto) {
+
+        taskRepository.findTaskById(updateDto.getTaskId())
+                .orElseThrow(() -> new NotFoundTaskException(String.format(TASK_NOT_FOUND_MESSAGE, updateDto.getTaskId())));
+
+        TaskStatus taskStatus = TaskStatus.fromString(updateDto.getTaskStatus());
+
+        return taskRepository.updateTaskStatus(updateDto.getTaskId(), taskStatus.getStatusId());
     }
 
 }
