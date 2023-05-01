@@ -1,5 +1,6 @@
 package com.projectmanager.repository;
 
+import com.projectmanager.model.entity.TaskCreateEntity;
 import com.projectmanager.model.entity.TaskEntity;
 
 import java.util.List;
@@ -12,4 +13,5 @@ public interface TaskRepository {
     int deleteTasksByProjectId(long projectId);
     int deleteTaskById(Long id);
     int updateTaskStatus(Long taskId, Long statusId);
+    int saveTask(TaskCreateEntity sourceEntity);
 }

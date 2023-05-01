@@ -1,6 +1,8 @@
 package com.projectmanager.model.mapper;
 
+import com.projectmanager.model.dto.task.TaskCreateReqDto;
 import com.projectmanager.model.dto.task.TaskResponseDto;
+import com.projectmanager.model.entity.TaskCreateEntity;
 import com.projectmanager.model.entity.TaskEntity;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -14,4 +16,6 @@ import org.mapstruct.ReportingPolicy;
 public interface TaskMapper {
 
     TaskResponseDto toResponseDto(TaskEntity taskEntity);
+
+    TaskCreateEntity toCreateEntity(TaskCreateReqDto reqDto);
 }

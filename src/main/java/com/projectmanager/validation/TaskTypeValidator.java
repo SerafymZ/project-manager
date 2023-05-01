@@ -1,18 +1,18 @@
 package com.projectmanager.validation;
 
-import com.projectmanager.model.TaskStatus;
+import com.projectmanager.model.TaskType;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TaskStatusValidator implements ConstraintValidator<AvailableStatusValue, String> {
+public class TaskTypeValidator implements ConstraintValidator<AvailableTypeValue, String> {
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
 
-        for(TaskStatus status : TaskStatus.values()) {
-            if(status.name().equals(value)) {
+        for (TaskType type : TaskType.values()) {
+            if(type.name().equals(value)) {
                 return true;
             }
         }

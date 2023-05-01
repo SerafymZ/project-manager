@@ -2,9 +2,11 @@ package com.projectmanager.service.impl;
 
 import com.projectmanager.exception.NotFoundTaskException;
 import com.projectmanager.model.TaskStatus;
+import com.projectmanager.model.TaskType;
 import com.projectmanager.model.dto.task.TaskCreateReqDto;
 import com.projectmanager.model.dto.task.TaskResponseDto;
 import com.projectmanager.model.dto.task.TaskStatusUpdateDto;
+import com.projectmanager.model.entity.TaskCreateEntity;
 import com.projectmanager.model.entity.TaskEntity;
 import com.projectmanager.model.mapper.TaskMapper;
 import com.projectmanager.repository.TaskRepository;
@@ -41,7 +43,10 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public int saveTask(TaskCreateReqDto reqDto) {
-        return 0;
+        TaskCreateEntity sourceEntity = taskMapper.toCreateEntity(reqDto);
+        TaskType taskType = TaskType.fromStringValue(reqDto.getTaskType());
+        sourceEntity.setTaskTypeId(taskType.getTaskTypeId());
+        return taskRepository.saveTask(sourceEntity);
     }
 
     @Override
@@ -64,7 +69,7 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.findTaskById(updateDto.getTaskId())
                 .orElseThrow(() -> new NotFoundTaskException(String.format(TASK_NOT_FOUND_MESSAGE, updateDto.getTaskId())));
 
-        TaskStatus taskStatus = TaskStatus.fromString(updateDto.getTaskStatus());
+        TaskStatus taskStatus = TaskStatus.fromStringValue(updateDto.getTaskStatus());
 
         return taskRepository.updateTaskStatus(updateDto.getTaskId(), taskStatus.getStatusId());
     }

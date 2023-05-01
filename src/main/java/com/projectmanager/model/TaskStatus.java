@@ -19,7 +19,7 @@ public enum TaskStatus {
         return statusId;
     }
 
-    public static TaskStatus fromString(String value) {
+    public static TaskStatus fromStringValue(String value) {
         for(TaskStatus status : TaskStatus.values()) {
             if(status.name().equals(value)) {
                 return status;

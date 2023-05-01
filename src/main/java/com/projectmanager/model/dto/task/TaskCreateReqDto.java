@@ -1,8 +1,6 @@
 package com.projectmanager.model.dto.task;
 
-import com.projectmanager.model.TaskType;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
+import com.projectmanager.validation.AvailableTypeValue;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,9 +15,8 @@ public class TaskCreateReqDto {
     private Long projectId;
 
     @NotNull
-    @Min(1)
-    @Max(2)
-    TaskType taskTypeId;
+    @AvailableTypeValue
+    private String taskType;
 
     private String description;
     private String branch;

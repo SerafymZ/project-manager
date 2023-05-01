@@ -1,6 +1,8 @@
 package com.projectmanager.repository.impl;
 
 import com.projectmanager.exception.SqlException;
+import com.projectmanager.model.TaskStatus;
+import com.projectmanager.model.entity.TaskCreateEntity;
 import com.projectmanager.model.entity.TaskEntity;
 import com.projectmanager.repository.TaskRepository;
 import lombok.RequiredArgsConstructor;
@@ -102,7 +104,7 @@ public class TaskRepositoryImpl implements TaskRepository {
     @Override
     public int updateTaskStatus(Long taskId, Long statusId) {
 
-        var sql = "UPDATE Task SET statusId = :statusId WHERE ID = :taskId";
+        var sql = "UPDATE Task SET statusId = :statusId, updateDate = CURRENT_TIMESTAMP WHERE ID = :taskId";
 
         var parameterSource = new MapSqlParameterSource()
                 .addValue("taskId", taskId)
@@ -111,6 +113,28 @@ public class TaskRepositoryImpl implements TaskRepository {
             return namedParameterJdbcTemplate.update(sql, parameterSource);
         } catch (DataAccessException exception) {
             throw new SqlException("Error during updating task status by id.")    ;
+        }
+    }
+
+    @Override
+    public int saveTask(TaskCreateEntity sourceEntity) {
+
+        var sql = "INSERT INTO Task(projectID, userId, taskTypeId, statusId, description, creationDate, updateDate, branch, managerDocs) "
+                + "VALUES(:projectId, :userId, :taskTypeId, :statusId, :description, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, :branch, :managerDocs)";
+
+        var parameterSource = new MapSqlParameterSource()
+                .addValue("projectId", sourceEntity.getProjectId())
+                .addValue("userId", 1L)
+                .addValue("taskTypeId", sourceEntity.getTaskTypeId())
+                .addValue("statusId", TaskStatus.NEW.getStatusId())
+                .addValue("description", sourceEntity.getDescription())
+                .addValue("branch", sourceEntity.getBranch())
+                .addValue("managerDocs", sourceEntity.getManagerDocs());
+
+        try {
+            return namedParameterJdbcTemplate.update(sql, parameterSource);
+        } catch (DataAccessException exception) {
+            throw new SqlException("Error during save task.");
         }
     }
 }
