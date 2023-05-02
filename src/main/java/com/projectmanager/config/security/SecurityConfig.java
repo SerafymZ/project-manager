@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig  {
@@ -25,31 +25,31 @@ public class SecurityConfig  {
     private static final String ROLE_ADMIN = "ADMIN";
     private static final String ROLE_USER = "USER";
 
-//    private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Bean
-//    public UserDetailsService userDetailsService() {
-    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
+    public UserDetailsService userDetailsService() {
+//    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
 
 
 
 
-        UserDetails admin = User.withUsername("admin")
-                .password(passwordEncoder.encode("admin"))
-                .roles(ROLE_ADMIN)
-                .build();
-
-        UserDetails user = User.withUsername("user")
-                .password(passwordEncoder.encode("user"))
-                .roles(ROLE_USER)
-                .build();
-
-        return new InMemoryUserDetailsManager(admin, user);
-
-
+//        UserDetails admin = User.withUsername("admin")
+//                .password(passwordEncoder.encode("admin"))
+//                .roles(ROLE_ADMIN)
+//                .build();
+//
+//        UserDetails user = User.withUsername("user")
+//                .password(passwordEncoder.encode("user"))
+//                .roles(ROLE_USER)
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(admin, user);
 
 
-//        return new CustomUserDetailService(userRepository);
+
+
+        return new CustomUserDetailService(userRepository);
     }
 
     @Bean
@@ -78,11 +78,11 @@ public class SecurityConfig  {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public AuthenticationProvider authenticationProvider() {
-//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-//        authenticationProvider.setUserDetailsService(userDetailsService());
-//        authenticationProvider.setPasswordEncoder(passwordEncoder());
-//        return authenticationProvider;
-//    }
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService());
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return authenticationProvider;
+    }
 }
