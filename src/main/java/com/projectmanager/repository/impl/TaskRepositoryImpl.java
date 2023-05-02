@@ -27,16 +27,20 @@ public class TaskRepositoryImpl implements TaskRepository {
     @Override
     public List<TaskEntity> findAllTasks() {
 
-        var sql = "SELECT ID, "
-                + "projectID, "
-                + "userID, "
-                + "taskTypeId, "
-                + "taskStatusId, "
-                + "description, "
-                + "branch, "
-                + "managerDocs, "
-                + "creationDate, "
-                + "updateDate FROM Task";
+        var sql = "SELECT t.ID, "
+                + "t.projectID, "
+                + "t.userID, "
+                + "t.taskTypeId, "
+                + "tt.taskType, "
+                + "t.taskStatusId, "
+                + "ts.taskStatus, "
+                + "t.description, "
+                + "t.branch, "
+                + "t.managerDocs, "
+                + "t.creationDate, "
+                + "t.updateDate FROM Task AS t "
+                + "JOIN TaskType AS tt ON t.taskTypeId = tt.ID "
+                + "JOIN TaskStatus AS ts ON t.taskStatusId = ts.ID";
 
         try {
             return namedParameterJdbcTemplate.query(sql, new BeanPropertyRowMapper<>(TaskEntity.class));
@@ -48,17 +52,20 @@ public class TaskRepositoryImpl implements TaskRepository {
     @Override
     public Optional<TaskEntity> findTaskById(long id) {
 
-        var sql = "SELECT ID, "
-                + "projectID, "
-                + "userID, "
-                + "taskTypeId, "
-                + "taskStatusId, "
-                + "description, "
-                + "branch, "
-                + "managerDocs, "
-                + "creationDate, "
-                + "updateDate FROM Task "
-                + "WHERE ID = :taskId";
+        var sql = "SELECT t.ID, "
+                + "t.projectID, "
+                + "t.userID, "
+                + "t.taskTypeId, "
+                + "tt.taskType, "
+                + "t.taskStatusId, "
+                + "ts.taskStatus, "
+                + "t.description, "
+                + "t.branch, "
+                + "t.managerDocs, "
+                + "t.creationDate, "
+                + "t.updateDate FROM Task AS t "
+                + "JOIN TaskType AS tt ON t.taskTypeId = tt.ID AND t.ID = :taskId "
+                + "JOIN TaskStatus AS ts ON t.taskStatusId = ts.ID";
 
         var parameterSource = new MapSqlParameterSource("taskId", id);
 

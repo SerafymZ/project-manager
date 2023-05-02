@@ -14,7 +14,9 @@ public class TaskEntity {
     private Long projectId;
     private Long userId;
     private Long taskTypeId;
+    private String taskType;
     private Long taskStatusId;
+    private String taskStatus;
     private String description;
     private String branch;
     private String managerDocs;

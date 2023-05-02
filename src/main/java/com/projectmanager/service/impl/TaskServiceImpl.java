@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Service
 public class TaskServiceImpl implements TaskService {
 
-    private final String TASK_NOT_FOUND_MESSAGE = "There is no project with ID = %d in database.";
+    private final String TASK_NOT_FOUND_MESSAGE = "There is no task with ID = %d in database.";
 
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;

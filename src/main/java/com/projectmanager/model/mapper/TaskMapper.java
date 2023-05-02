@@ -5,10 +5,7 @@ import com.projectmanager.model.dto.task.TaskResponseDto;
 import com.projectmanager.model.dto.task.TaskUpdateDto;
 import com.projectmanager.model.entity.TaskCreateEntity;
 import com.projectmanager.model.entity.TaskEntity;
-import org.mapstruct.InjectionStrategy;
-import org.mapstruct.Mapper;
-import org.mapstruct.NullValueCheckStrategy;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
@@ -16,6 +13,10 @@ import org.mapstruct.ReportingPolicy;
         injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface TaskMapper {
 
+    @Mapping(source = "taskEntity.taskTypeId", target = "taskType.id")
+    @Mapping(source = "taskEntity.taskType", target = "taskType.type")
+    @Mapping(source = "taskEntity.taskStatusId", target = "taskStatus.id")
+    @Mapping(source = "taskEntity.taskStatus", target = "taskStatus.status")
     TaskResponseDto toResponseDto(TaskEntity taskEntity);
 
     TaskCreateEntity toCreateEntity(TaskCreateReqDto reqDto);

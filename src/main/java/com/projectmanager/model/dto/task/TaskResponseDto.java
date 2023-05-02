@@ -14,8 +14,8 @@ public class TaskResponseDto {
     private Long id;
     private Long projectId;
     private Long userId;
-    private Long taskTypeId;
-    private Long taskStatusId;
+    private TaskTypeDto taskType;
+    private TaskStatusDto taskStatus;
     private String description;
     private String branch;
     private String managerDocs;
