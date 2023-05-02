@@ -34,6 +34,24 @@ public class UserRepositoryImpl implements UserRepository {
         } catch (EmptyResultDataAccessException exception) {
             return Optional.empty();
         }
+    }
 
+    @Override
+    public Optional<UserEntity> findById(Long userId) {
+
+        var sql = "SELECT ud.ID, "
+                + "ud.username, "
+                + "ud.password, "
+                + "a.authority FROM UserDetail AS ud "
+                + "JOIN Authority AS a ON ud.authorityID = a.ID AND userId = :userId";
+
+        var parameterSource = new MapSqlParameterSource("userId", userId);
+
+        try {
+            UserEntity foundedEntity = jdbcTemplate.queryForObject(sql, parameterSource, new BeanPropertyRowMapper<>(UserEntity.class));
+            return Optional.of(foundedEntity);
+        } catch (EmptyResultDataAccessException exception) {
+            return Optional.empty();
+        }
     }
 }

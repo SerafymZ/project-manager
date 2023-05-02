@@ -3,7 +3,9 @@ package com.projectmanager.model.dto.task;
 import com.projectmanager.validation.IsAvailableType;
 import com.projectmanager.validation.IsAvailableStatus;
 import com.projectmanager.validation.IsProjectExist;
+import com.projectmanager.validation.IsUserExist;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +20,8 @@ public class TaskUpdateDto {
     @NotNull
     @IsProjectExist
     private Long projectId;
+
+    @IsUserExist
     private Long userId;
 
     @IsAvailableStatus
@@ -26,7 +30,12 @@ public class TaskUpdateDto {
     @IsAvailableType
     private Long taskTypeId;
 
+    @Size(max = 255)
     private String description;
+
+    @Size(max = 100)
     private String branch;
+
+    @Size(max = 100)
     private String managerDocs;
 }
