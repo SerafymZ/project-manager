@@ -1,8 +1,12 @@
 package com.projectmanager.config.security;
 
+import com.projectmanager.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -13,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+//@RequiredArgsConstructor
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig  {
@@ -20,8 +25,15 @@ public class SecurityConfig  {
     private static final String ROLE_ADMIN = "ADMIN";
     private static final String ROLE_USER = "USER";
 
+//    private final UserRepository userRepository;
+
     @Bean
+//    public UserDetailsService userDetailsService() {
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
+
+
+
+
         UserDetails admin = User.withUsername("admin")
                 .password(passwordEncoder.encode("admin"))
                 .roles(ROLE_ADMIN)
@@ -33,6 +45,11 @@ public class SecurityConfig  {
                 .build();
 
         return new InMemoryUserDetailsManager(admin, user);
+
+
+
+
+//        return new CustomUserDetailService(userRepository);
     }
 
     @Bean
@@ -47,6 +64,11 @@ public class SecurityConfig  {
                 .requestMatchers(HttpMethod.POST, "/project").hasRole(ROLE_ADMIN)
                 .requestMatchers(HttpMethod.PUT, "/project/{id:\\d+}").hasRole(ROLE_ADMIN)
                 .requestMatchers(HttpMethod.DELETE, "/project/{id:\\d+}").hasRole(ROLE_ADMIN)
+                .requestMatchers(HttpMethod.GET, "/task").hasAnyRole(ROLE_USER, ROLE_ADMIN)
+                .requestMatchers(HttpMethod.POST, "/task").hasRole(ROLE_ADMIN)
+                .requestMatchers(HttpMethod.PUT, "/task/status/{id:\\d+}").hasAnyRole(ROLE_USER, ROLE_ADMIN)
+                .requestMatchers(HttpMethod.PUT, "/task/{id:\\d+}").hasRole(ROLE_ADMIN)
+                .requestMatchers(HttpMethod.DELETE, "/task/{id:\\d+}").hasRole(ROLE_ADMIN)
                 .anyRequest().denyAll()
                 .and().build();
     }
@@ -55,4 +77,12 @@ public class SecurityConfig  {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+//    @Bean
+//    public AuthenticationProvider authenticationProvider() {
+//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+//        authenticationProvider.setUserDetailsService(userDetailsService());
+//        authenticationProvider.setPasswordEncoder(passwordEncoder());
+//        return authenticationProvider;
+//    }
 }

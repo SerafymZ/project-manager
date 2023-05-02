@@ -5,6 +5,7 @@ import com.projectmanager.model.dto.Status;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -66,6 +67,12 @@ public class ProjectManagerExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<ResponseDto> handleException(ConstraintViolationException exception) {
+        var response = new ResponseDto(Status.Failed, List.of(exception.getMessage()));
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ResponseDto> handleException(UsernameNotFoundException exception) {
         var response = new ResponseDto(Status.Failed, List.of(exception.getMessage()));
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }

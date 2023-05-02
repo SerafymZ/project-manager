@@ -32,7 +32,7 @@ CREATE TABLE UserDetail (
     ID bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username varchar(20) NOT NULL,
     password varchar(150),
-    authorities varchar(255)
+    authority varchar(255)
 );
 
 INSERT INTO Project(parentid, name, description) VALUES (null, 'Development', 'Development');
@@ -56,8 +56,8 @@ INSERT INTO Task(projectID, userId, taskTypeId, taskStatusId, description, creat
 (1, 1, 2, 1, 'description', '2023-04-17 18:47:52.69', '2023-04-18 15:50:52.69','branch1', null),
 (4, 2, 1, 2, 'description', '2023-04-11 14:45:52.69', '2023-04-12 09:53:52.69', null, 'docs');
 
-INSERT INTO UserDetail (username, password, authorities) VALUES(N'user', N'user', N'USER');
-INSERT INTO UserDetail (username, password, authorities) VALUES(N'admin', N'admin', N'ADMIN');
+INSERT INTO UserDetail (username, password, authority) VALUES(N'user', N'$2a$12$z.zYYlRb1poY0CeP/s1rG.zarpbiP1Nbw2BvJ/QkB81Z15mDy4E36', N'USER');
+INSERT INTO UserDetail (username, password, authority) VALUES(N'admin', N'$2a$12$6CLUFtsJhxRgp5iTRva1O.vg7z7Jd1QMwWbZC.v32f65cAHBkY2Re', N'ADMIN');
 
 
 -- CREATE TABLE users(
