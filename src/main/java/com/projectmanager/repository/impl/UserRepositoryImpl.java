@@ -3,7 +3,6 @@ package com.projectmanager.repository.impl;
 import com.projectmanager.model.entity.UserEntity;
 import com.projectmanager.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -21,11 +20,11 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public Optional<UserEntity> findByName(String username) {
 
-        var sql = "SELECT ID, "
-                + "username, "
-                + "password, "
-                + "authority FROM UserDetail "
-                + "WHERE username = :username";
+        var sql = "SELECT ud.ID, "
+                + "ud.username, "
+                + "ud.password, "
+                + "a.authority FROM UserDetail AS ud "
+                + "JOIN Authority AS a ON ud.authorityID = a.ID AND username = :username";
 
         var parameterSource = new MapSqlParameterSource("username", username);
 

@@ -32,7 +32,12 @@ CREATE TABLE UserDetail (
     ID bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username varchar(20) NOT NULL,
     password varchar(150),
-    authority varchar(255)
+    authorityID bigint NOT NULL
+);
+
+CREATE TABLE Authority(
+    ID bigint NOT NULL PRIMARY KEY,
+    authority varchar(15)
 );
 
 INSERT INTO Project(parentid, name, description) VALUES (null, 'Development', 'Development');
@@ -56,25 +61,8 @@ INSERT INTO Task(projectID, userId, taskTypeId, taskStatusId, description, creat
 (1, 1, 2, 1, 'description', '2023-04-17 18:47:52.69', '2023-04-18 15:50:52.69','branch1', null),
 (4, 2, 1, 2, 'description', '2023-04-11 14:45:52.69', '2023-04-12 09:53:52.69', null, 'docs');
 
-INSERT INTO UserDetail (username, password, authority) VALUES(N'user', N'$2a$12$z.zYYlRb1poY0CeP/s1rG.zarpbiP1Nbw2BvJ/QkB81Z15mDy4E36', N'USER');
-INSERT INTO UserDetail (username, password, authority) VALUES(N'admin', N'$2a$12$6CLUFtsJhxRgp5iTRva1O.vg7z7Jd1QMwWbZC.v32f65cAHBkY2Re', N'ADMIN');
+INSERT INTO Authority (ID, authority) VALUES (1, N'ROLE_USER');
+INSERT INTO Authority (ID, authority) VALUES (2, N'ROLE_ADMIN');
 
-
--- CREATE TABLE users(
---     username varchar(15) PRIMARY KEY,
---     password varchar(150),
---     enabled tinyint
---     );
---
--- CREATE TABLE authorities(
---     username varchar(15) REFERENCES users(username),
---     authority varchar(15)
---     );
---
--- INSERT INTO users (username, password, enabled) VALUES
---     (N'user', N'{bcrypt}$2a$10$j5DUDV4o2reodruq9086FePFB4fxLrzq/0ZUqh3zXotYEaC2oemai', 1),
---     (N'admin', N'{bcrypt}$2a$10$50Oag0ifCFghZ1pMU5WeSO1hKHfpgY2DHBAb2TUv/vgK7SWy81IqS', 1);
---
--- INSERT INTO authorities (username, authority) VALUES
---     (N'user', N'ROLE_USER'),
---     (N'admin', N'ROLE_ADMIN');
+INSERT INTO UserDetail (username, password, authorityID) VALUES(N'user', N'$2a$12$z.zYYlRb1poY0CeP/s1rG.zarpbiP1Nbw2BvJ/QkB81Z15mDy4E36', 1);
+INSERT INTO UserDetail (username, password, authorityID) VALUES(N'admin', N'$2a$12$6CLUFtsJhxRgp5iTRva1O.vg7z7Jd1QMwWbZC.v32f65cAHBkY2Re', 2);
