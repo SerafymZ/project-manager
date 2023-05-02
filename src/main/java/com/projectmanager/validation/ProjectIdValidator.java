@@ -14,6 +14,11 @@ public class ProjectIdValidator implements ConstraintValidator<IsProjectExist, L
 
     @Override
     public boolean isValid(Long value, ConstraintValidatorContext constraintValidatorContext) {
+
+        if(value == null) {
+            return true;
+        }
+
         return projectRepository.findProjectById(value).isPresent();
     }
 }

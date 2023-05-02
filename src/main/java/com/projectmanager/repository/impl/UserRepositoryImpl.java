@@ -43,7 +43,7 @@ public class UserRepositoryImpl implements UserRepository {
                 + "ud.username, "
                 + "ud.password, "
                 + "a.authority FROM UserDetail AS ud "
-                + "JOIN Authority AS a ON ud.authorityID = a.ID AND userId = :userId";
+                + "JOIN Authority AS a ON ud.authorityID = a.ID AND ud.ID = :userId";
 
         var parameterSource = new MapSqlParameterSource("userId", userId);
 

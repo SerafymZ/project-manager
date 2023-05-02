@@ -45,7 +45,7 @@ public class SecurityConfig  {
                 .requestMatchers(HttpMethod.POST, "/task").hasRole(ROLE_ADMIN)
                 .requestMatchers(HttpMethod.PUT, "/task/status/{id:\\d+}").hasAnyRole(ROLE_USER, ROLE_ADMIN)
                 .requestMatchers(HttpMethod.PUT, "/task/{id:\\d+}").hasRole(ROLE_ADMIN)
-                .requestMatchers(HttpMethod.DELETE, "/task/{id:\\d+}").hasRole(ROLE_ADMIN)
+                .requestMatchers(HttpMethod.DELETE, "/task/{id:\\d+}").hasAnyRole(ROLE_USER, ROLE_ADMIN)
                 .anyRequest().denyAll()
                 .and().build();
     }
