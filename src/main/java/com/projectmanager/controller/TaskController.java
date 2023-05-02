@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 @Validated
@@ -88,7 +89,7 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseDto deleteTaskById(@Min(1) @PathVariable Long id) {
+    public ResponseDto deleteTaskById(@Min(1) @PathVariable Long id) throws AccessDeniedException {
 
         int deletedTasksCount = taskService.deleteTaskById(id);
 

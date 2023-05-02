@@ -1,6 +1,7 @@
 package com.projectmanager.service.impl;
 
 import com.projectmanager.exception.NotFoundTaskException;
+import com.projectmanager.model.UserDataHolder;
 import com.projectmanager.model.dto.task.TaskCreateReqDto;
 import com.projectmanager.model.dto.task.TaskResponseDto;
 import com.projectmanager.model.dto.task.TaskStatusUpdateDto;
@@ -14,6 +15,7 @@ import com.projectmanager.service.ValidationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.AccessDeniedException;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 public class TaskServiceImpl implements TaskService {
 
     private final String TASK_NOT_FOUND_MESSAGE = "There is no task with ID = %d in database.";
+    private final String ACCESS_DENIED_MESSAGE = "You do not have access to delete this task.";
 
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
@@ -55,10 +58,17 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public int deleteTaskById(Long id) {
+    public int deleteTaskById(Long id) throws AccessDeniedException {
 
-        taskRepository.findTaskById(id)
+        TaskEntity taskEntity = taskRepository.findTaskById(id)
                 .orElseThrow(() -> new NotFoundTaskException(String.format(TASK_NOT_FOUND_MESSAGE, id)));
+
+        Long userId = UserDataHolder.getUserData().getUserId();
+        Long taskUserId = taskEntity.getUserId();
+
+        if(!taskUserId.equals(userId)) {
+            throw new AccessDeniedException(ACCESS_DENIED_MESSAGE);
+        }
 
         return taskRepository.deleteTaskById(id);
     }

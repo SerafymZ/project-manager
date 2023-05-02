@@ -11,6 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +74,12 @@ public class ProjectManagerExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<ResponseDto> handleException(UsernameNotFoundException exception) {
+        var response = new ResponseDto(Status.Failed, List.of(exception.getMessage()));
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ResponseDto> handleException(AccessDeniedException exception) {
         var response = new ResponseDto(Status.Failed, List.of(exception.getMessage()));
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }

@@ -5,6 +5,7 @@ import com.projectmanager.model.dto.task.TaskResponseDto;
 import com.projectmanager.model.dto.task.TaskStatusUpdateDto;
 import com.projectmanager.model.dto.task.TaskUpdateDto;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 public interface TaskService {
@@ -12,7 +13,7 @@ public interface TaskService {
     List<TaskResponseDto> getAllTasks();
     int saveTask(TaskCreateReqDto reqDto);
     void deleteTasksByProjectID(long projectId);
-    int deleteTaskById(Long id);
+    int deleteTaskById(Long id) throws AccessDeniedException;
     int updateTaskStatus(TaskStatusUpdateDto updateDto);
     int updateTask(TaskUpdateDto taskUpdateDto);
 }
