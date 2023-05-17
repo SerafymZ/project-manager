@@ -26,12 +26,4 @@ public class CustomUserDetailService implements UserDetailsService {
 
         return new CustomUserDetails(userEntity);
     }
-
-//    @Override
-//    public UserDetails updatePassword(UserDetails user, String newPassword) {
-//        String username = user.getUsername();
-//        MutableUserDetails mutableUser = (MutableUserDetails)this.users.get(username.toLowerCase());
-//        mutableUser.setPassword(newPassword);
-//        return mutableUser;
-//    }
 }
